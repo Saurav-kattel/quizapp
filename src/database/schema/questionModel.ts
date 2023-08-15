@@ -20,6 +20,10 @@ let model =
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
+    category: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
     answerIndex: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -10,9 +10,9 @@ export async function checkPassword({
   email: string;
 }) {
   let admin: any = await fetchUser({ email, userModel: adminModel });
+  console.log(admin);
   if (!admin) {
     let user: any = await fetchUser({ email, userModel });
-    console.log(user);
     if (!user) return { error: "no user found", isCorrect: false };
     const isCorrect = await bcrypt.compare(password, user.password);
     if (!isCorrect) return { isCorrect, error: "wrong password" };

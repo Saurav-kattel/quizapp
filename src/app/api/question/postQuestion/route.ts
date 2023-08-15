@@ -4,10 +4,12 @@ import { verifyJwtToken } from "../../_helpers/verifyJwt";
 import { requestCreateQuestion } from "../../_helpers/createQuestion";
 import adminModel from "@/database/schema/adminModel";
 import { NextResponse } from "next/server";
+import { isDupicateQuestion } from "../../_helpers/isDuplicateQuestion";
 
 export async function POST(request: Request) {
-  const { question, answer, answerIndex } = await request.json();
+  const { question, answer, answerIndex, category } = await request.json();
 
+  console.log(question, answer);
   const details: { id: string; email: string } = await verifyJwtToken(request);
 
   if (details.hasOwnProperty("error")) return details;
@@ -21,11 +23,21 @@ export async function POST(request: Request) {
       status: 401,
     });
   try {
+    const dupicateQuestion = await isDupicateQuestion({
+      questionstr: question,
+      model: questionModel,
+    });
+    if (dupicateQuestion)
+      return NextResponse.json({
+        error: "question alredy exists",
+        status: 401,
+      });
     let createdQuestion = await requestCreateQuestion({
       question,
-      answer,
+      answer: [...answer],
       answerIndex,
       model: questionModel,
+      category: [...category],
     });
 
     return NextResponse.json({
