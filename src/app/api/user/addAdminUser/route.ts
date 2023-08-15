@@ -4,7 +4,7 @@ import { createNewAccount } from "../../_helpers/createNewAccount";
 import { generateJwtToken } from "../../_helpers/generateJwtToken";
 import { hashPassword } from "../../_helpers/hashPassword";
 import { validate } from "../../_helpers/validate";
-import userModel from "@/database/schema/userModel";
+import userModel from "@/database/schema/adminModel";
 export async function POST(request: Request) {
   let body = await request.json();
   const errors = validate(body);
