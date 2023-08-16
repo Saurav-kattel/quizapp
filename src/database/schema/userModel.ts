@@ -27,5 +27,4 @@ let model =
       allowNull: false,
     },
   });
-
 export default model;
