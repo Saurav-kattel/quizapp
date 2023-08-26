@@ -9,9 +9,9 @@ export function validate(body: {
   }[] = [];
 
   if (
-    !body.hasOwnProperty("username") ||
-    !body.hasOwnProperty("username") ||
-    !body.hasOwnProperty("username")
+    !body.hasOwnProperty("username") &&
+    !body.hasOwnProperty("email") &&
+    !body.hasOwnProperty("password")
   ) {
     errors.push(
       { field: "username", message: "username cannot be null" },

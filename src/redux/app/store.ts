@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { execOnce } from "next/dist/shared/lib/utils";
-import questionSlice from "../features/questionSlice";
+import answerSlice from "../features/answerSlice";
 
 const store = configureStore({
-  reducer: { question: questionSlice },
+  reducer: {
+    answer: answerSlice,
+  },
 });
 
 export default store;

@@ -9,7 +9,6 @@ import { isDupicateQuestion } from "../../_helpers/isDuplicateQuestion";
 export async function POST(request: Request) {
   const { question, answer, answerIndex, category } = await request.json();
 
-  console.log(question, answer);
   const details: { id: string; email: string } = await verifyJwtToken(request);
 
   if (details.hasOwnProperty("error")) return details;

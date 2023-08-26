@@ -10,7 +10,6 @@ export async function checkPassword({
   email: string;
 }) {
   let admin: any = await fetchUser({ email, userModel: adminModel });
-  console.log(admin);
   if (!admin) {
     let user: any = await fetchUser({ email, userModel });
     if (!user) return { error: "no user found", isCorrect: false };
