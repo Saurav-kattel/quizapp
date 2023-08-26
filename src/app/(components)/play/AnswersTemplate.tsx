@@ -1,6 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import AnswerBox from "./AnswerBox";
+import { checkAnswer } from "./checkAnswer";
 
 export default function AnswerTemplate({
   options,
@@ -9,48 +9,30 @@ export default function AnswerTemplate({
   options: string[];
   answerIndex: number;
 }) {
-  const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
-
-  const checkCorrectAnswer = (answer: number) => {
-    if (answer === answerIndex) {
-      setIsCorrectAnswer(true);
-    }
-  };
-
+  const answer = options[answerIndex];
   return (
-    <ul>
-      {options.map((answer, index) => {
-        return (
-          <div key={index}>
-            <motion.li
-              onClick={() => {
-                checkCorrectAnswer(index);
-              }}
-              whileHover={{
-                scale: 1.1,
-                borderRadius: "0.6rem",
-                backgroundColor: "white",
-                color: "black",
-              }}
-              initial={{
-                backgroundColor: "transparent",
-              }}
-              animate={{
-                backgroundColor: isCorrectAnswer ? "green" : "transparent",
-              }}
-              transition={{
-                type: "spring",
-                duration: 0.2,
-              }}
-              className={`p-4 border-1 shadow-slate-900 rounded-lg shadow flex-warp m-2   ${
-                isCorrectAnswer ? "bg-green-700" : "bg-red-700"
-              }`}
-            >
-              {answer}
-            </motion.li>
-          </div>
-        );
-      })}
-    </ul>
+    <div>
+      <AnswerBox
+        answerTitle={options[0]}
+        clickHandler={checkAnswer}
+        answer={answer}
+      />
+      <AnswerBox
+        answerTitle={options[1]}
+        clickHandler={checkAnswer}
+        answer={answer}
+      />
+
+      <AnswerBox
+        answerTitle={options[2]}
+        clickHandler={checkAnswer}
+        answer={answer}
+      />
+      <AnswerBox
+        answerTitle={options[3]}
+        clickHandler={checkAnswer}
+        answer={answer}
+      />
+    </div>
   );
 }

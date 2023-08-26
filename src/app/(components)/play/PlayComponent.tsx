@@ -12,9 +12,9 @@ export default function ShowQuestion({ question }: { question: Question[] }) {
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            initial={{ x: 100, opacity: 0 }}
+            initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -100, opacity: 0 }}
+            exit={{ x: 100, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
             className="h-[40vh] flex flex-col items-center justify-center"
           >
