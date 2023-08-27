@@ -6,8 +6,8 @@ export function checkAnswer({
   answer: string;
 }) {
   if (answer === answerTitle) {
-    return "bg-green-700";
+    return { color: "bg-green-700", isTrue: true };
   } else {
-    return "bg-red-700";
+    return { color: "bg-red-700", isTrue: false };
   }
 }

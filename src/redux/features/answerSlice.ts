@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   answer: "",
+  isRight: false,
 };
 const answerSlice = createSlice({
   name: "amswerslice",
@@ -9,8 +10,11 @@ const answerSlice = createSlice({
     setAnswer: (state, action) => {
       state.answer = action.payload;
     },
+    setIsRight: (state, action) => {
+      state.isRight = action.payload;
+    },
   },
 });
 
 export default answerSlice.reducer;
-export const { setAnswer } = answerSlice.actions;
+export const { setAnswer, setIsRight } = answerSlice.actions;
