@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setScore } from "@/redux/features/scoreSlice";
 import { setIsRight } from "@/redux/features/answerSlice";
+import { handleSoundAndColor } from "./handleColorAndSound";
 export default function AnswerBox({
   answerTitle,
   answer,
@@ -25,22 +26,20 @@ export default function AnswerBox({
   const dispatch = useDispatch();
   const score = useSelector((state: any) => state.score.score);
 
-  let point = 88;
-
-  function handleAnswerClick() {
+  function handleClick() {
     let { color, isTrue } = clickHandler({ answerTitle, answer });
-    setBg(color);
-
-    if (isTrue) {
-      dispatch(setScore(score + point));
-      dispatch(setIsRight(true));
-
-      const newIndex = index >= MAX_LENGTH - 1 ? 0 : index + 1;
-      setIndex(newIndex);
-    } else {
-      dispatch(setScore(score - point / 2));
-      dispatch(setIsRight(false));
-    }
+    handleSoundAndColor({
+      setBg,
+      isTrue,
+      dispatch,
+      setScore,
+      setIsRight,
+      MAX_LENGTH,
+      index,
+      score,
+      color,
+      setIndex,
+    });
   }
   return (
     <motion.div
@@ -54,8 +53,8 @@ export default function AnswerBox({
       }}
       onClick={() => {
         if (!isClicked) {
-          handleAnswerClick();
           setIsClicked(true);
+          handleClick();
         }
       }}
       className={`p-4 border-1 shadow-slate-900 rounded-lg shadow flex-warp m-2 ${bg}`}
